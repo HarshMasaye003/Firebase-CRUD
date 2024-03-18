@@ -13,6 +13,8 @@ const Login = ({setAuthUser}) => {
     const email = e.target.elements.email.value;
     const password = e.target.elements.password.value;
     const auth = getAuth();
+
+    const activeUser = {email:email,password:password}
    
 
     signInWithEmailAndPassword(auth, email, password)
@@ -29,7 +31,7 @@ const Login = ({setAuthUser}) => {
           },
           willClose: () => {
             setAuthUser(true);
-
+            localStorage.setItem('user', JSON.stringify(activeUser))
             Swal.fire({
               icon: "success",
               title: "Successfully logged in!",
@@ -39,6 +41,7 @@ const Login = ({setAuthUser}) => {
           },
         });
         navigate('/table')
+        // getData()
       })
       .catch((error) => {
         const errorCode = error.code;

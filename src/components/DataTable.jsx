@@ -11,8 +11,10 @@ import {
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import AddData from "./AddData";
 import ShowData from "./ShowData";
+import { PowerCircleIcon } from "lucide-react";
+import Login from "./Login";
 
-const DataTable = ({setIsAuthenticated}) => {
+const DataTable = ({ setAuthUser }) => {
   const [userData, setUserData] = useState([]);
 
   const [showModal, setShowModal] = useState(false);
@@ -36,10 +38,28 @@ const DataTable = ({setIsAuthenticated}) => {
       //   setDataFetched(dataFetched = prev + 1)
     }
   };
+  const activeUser = localStorage.getItem("user");
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setAuthUser(false);
+  };
 
   return (
     <div className=" overflow-auto">
-      <div className="w-full flex justify-center text-xl font-semibold py-3" >CRUD Firebase</div>
+      <div className="w-full flex py-3 justify-between items-center ">
+        <h1 className=" relative left-3 text-red-400 " >{JSON.parse(activeUser).email}</h1>
+        <strong className="text-xl font-semibold relative right-16 ">Firebase CRUD</strong>
+        <div className=" relative right-3">
+          <button
+            className="bg-black text-white rounded-full p-1 "
+            onClick={handleLogout}
+          >
+            {" "}
+            <PowerCircleIcon />{" "}
+          </button>
+        </div>
+      </div>
       <hr />
       <ShowData userData={userData} />
       <div className=" w-full flex gap-2 justify-center mt-2">
@@ -61,6 +81,7 @@ const DataTable = ({setIsAuthenticated}) => {
       {showModal && (
         <AddData
           userData={userData}
+          getData={getData}
           setUserData={setUserData}
           toggleModal={toggleModal}
         />

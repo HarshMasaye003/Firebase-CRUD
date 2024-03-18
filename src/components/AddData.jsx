@@ -11,7 +11,7 @@ import {
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import Swal from "sweetalert2";
 
-const AddData = ({ setUserData, toggleModal }) => {
+const AddData = ({getData, setUserData, toggleModal }) => {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
@@ -36,6 +36,15 @@ const AddData = ({ setUserData, toggleModal }) => {
         showConfirmButton: false,
         timer: 1500,
       });
+      setFname("");
+      setLname("");
+      setEmail("");
+      setMobnum("");
+      setPassword("");
+      setTimeout(() => {
+        toggleModal(false);
+      }, 1200);
+      getData()
     } catch (err) {
       Swal.fire({
         icon: "error",
@@ -63,7 +72,7 @@ const AddData = ({ setUserData, toggleModal }) => {
                 }}
               >
                 <div className="flex flex-col items-center ">
-                  <h1 className="text-xl font-semibold text-black mt-2 ">
+                  <h1 className="text-xl font-semibold text-black my-2 ">
                     REGISTER
                   </h1>
                 </div>

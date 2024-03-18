@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import UpdateData from "./UpdateData";
+import { Delete, Edit, Trash2 } from "lucide-react";
 
 const ShowData = ({ userData }) => {
   const [editToggle, setEditToggle] = useState(false);
@@ -50,9 +51,7 @@ const ShowData = ({ userData }) => {
               <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
                 <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70"></p>
               </th>
-              <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70"></p>
-              </th>
+
             </tr>
           </thead>
           <tbody>
@@ -84,24 +83,32 @@ const ShowData = ({ userData }) => {
                       {user.mobnum}
                     </p>
                   </td>
-                  <td className="p-4">
+                  <td className="p-4 flex gap-1">
                     <button
                       href="#"
-                      className="block bg-black text-white px-3 py-1 rounded-md font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900"
+                      className="block bg-black text-white px-1 py-1 rounded-md font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900"
                       onClick={() => {
                         setEditToggle(!editToggle);
                         handleEdit(user)
                       }}
                     >
-                      Edit
+                      <Edit/>
+                    </button>
+                    <button
+                      href="#"
+                      className="block bg-black text-white px-1 py-1 rounded-md font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900"
+                      onClick={() => {
+                        setEditToggle(!editToggle);
+                        handleEdit(user)
+                      }}
+                    >
+                      <Trash2/>
                     </button>
                   </td>
                   <td className="p-4">
                     <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900"></p>
                   </td>
-                  <td className="p-4">
-                    <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900"></p>
-                  </td>
+
                 </tr>
               ))
             ) : (
